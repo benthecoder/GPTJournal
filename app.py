@@ -40,11 +40,6 @@ def bye(message):
     bot.reply_to(message, gpt.end_chat())
 
 
-@bot.message_handler(commands=["debug"])
-def get_messages(message):
-    bot.reply_to(message, pprint(gpt.messages))
-
-
 @bot.message_handler(func=lambda message: True, content_types=["text"])
 def chat(message):
     """Generate a response to a user-provided message"""
