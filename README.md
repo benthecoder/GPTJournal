@@ -16,6 +16,10 @@ At the end of the day, it will summarize and organize my thoughts and upload it 
 
 ## TODO
 
+questions
+
+- how to store memory of conversation? using what platform?
+
 - [ ] integrate with notion
   - [ ] get text throughout the day somehow
   - [ ] summarize it with gpt

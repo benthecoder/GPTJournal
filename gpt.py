@@ -38,8 +38,9 @@ class ChatGPT:
         return result
 
     def end_chat(self):
+
         return f"Goodbye Ben. Total tokens used: {self.total_tokens} \
-            (${self.total_tokens * COST})"
+            (${self.total_tokens * COST} {self.messages})"
 
     def execute(self):
 
