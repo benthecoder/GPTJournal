@@ -29,7 +29,7 @@ def webhook():
         flask.abort(403)
 
 
-@bot.message_handler(commands=["start"])
+@bot.message_handler(commands=["hi"])
 def send_welcome(message):
     bot.reply_to(message, "Howdy, how are you doing? Start chating with me!")
 
@@ -42,7 +42,7 @@ def bye(message):
 @bot.message_handler(func=lambda message: True, content_types=["text"])
 def chat(message):
     """Generate a response to a user-provided message"""
-    response = gpt.chat(message.text)
+    response = gpt(message.text)
     bot.reply_to(message, response)
 
 
