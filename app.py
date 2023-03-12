@@ -4,6 +4,7 @@ import telebot
 
 from dotenv import load_dotenv
 from gpt import ChatGPT
+from pprint import pprint
 
 load_dotenv()
 gpt = ChatGPT()
@@ -37,6 +38,11 @@ def send_welcome(message):
 @bot.message_handler(commands=["end"])
 def bye(message):
     bot.reply_to(message, gpt.end_chat())
+
+
+@bot.message_handler(commands=["debug"])
+def debug(message):
+    bot.reply_to(message, pprint(gpt.messages))
 
 
 @bot.message_handler(func=lambda message: True, content_types=["text"])
