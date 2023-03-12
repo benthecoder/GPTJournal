@@ -34,7 +34,7 @@ def send_welcome(message):
     bot.reply_to(message, "Howdy, how are you doing? Start chating with me!")
 
 
-@bot.message_handler(commands=["start"])
+@bot.message_handler(commands=["end"])
 def bye(message):
     bot.reply_to(message, gpt.end_chat())
 
