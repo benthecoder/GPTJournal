@@ -47,7 +47,8 @@ At the end of the day, it will summarize and organize my thoughts and upload it 
 
 1. sign in with Github
 2. import this git repository
-3. Copy the webhook url
+3. set env variables
+4. hit Deploy
 
 Limits of the [hobby plan](https://vercel.com/docs/concepts/limits/overview#general-limits)
 

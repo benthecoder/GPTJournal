@@ -49,4 +49,4 @@ def chat(message):
 if __name__ == "__main__":
     # Remove webhook, it fails sometimes the set if there is a previous webhook
     bot.remove_webhook()
-    bot.set_webhook(url="https://gpt-journal-qthtlryco-benthecoder.vercel.app/webhook")
+    bot.set_webhook(url="https://gpt-journal-benthecoder.vercel.app/webhook")
