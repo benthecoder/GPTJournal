@@ -41,7 +41,7 @@ def bye(message):
 
 
 @bot.message_handler(commands=["debug"])
-def debug(message):
+def get_messages(message):
     bot.reply_to(message, pprint(gpt.messages))
 
 
