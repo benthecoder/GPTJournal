@@ -49,14 +49,21 @@ def echo(message):
 @bot.message_handler(commands=["summarize"])
 def summarize(message):
     """Summarize the conversation and upload conversation to Notion"""
-    title = gpt("Summarize our conversation so far in 10 words or less")
+    title = gpt("Summarize our conversation today in 10 words")
     messages = gpt.messages
     response = ""
-    for message in messages:
-        response += f"{message['role']}: {message['content']}"
+    for message in messages[1:]:
+        response += f"{message['role']}: {message['content']} \n\n"
 
-    if create_page(title, response):
+    page = create_page(title, response)
+
+    if page:
         bot.reply_to(message, f"Successfully created page titled: {title}")
+
+
+@bot.message_handler(commands=["debug"])
+def total_messages(message):
+    bot.reply_to(message, len(gpt.messages))
 
 
 @bot.message_handler(func=lambda message: True, content_types=["text"])
