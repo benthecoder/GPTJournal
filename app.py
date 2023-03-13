@@ -4,13 +4,14 @@ import telebot
 
 from dotenv import load_dotenv
 from gpt import ChatGPT
-from pprint import pprint
+from notion import create_page
+
 
 load_dotenv()
-gpt = ChatGPT()
 
 app = flask.Flask(__name__)
 bot = telebot.TeleBot(os.environ["TELEGRAM_TOKEN"], threaded=False)
+gpt = ChatGPT()
 
 
 @app.route("/")
@@ -30,14 +31,32 @@ def webhook():
         flask.abort(403)
 
 
-@bot.message_handler(commands=["hi"])
-def send_welcome(message):
-    bot.reply_to(message, "Howdy, how are you doing? Start chating with me!")
+@bot.message_handler(commands=["start"])
+def start(message):
+    """Send a message when the command /start is issued."""
+    bot.reply_to(
+        message,
+        "Hi there! Start by typing anything :)",
+    )
 
 
-@bot.message_handler(commands=["end"])
-def bye(message):
-    bot.reply_to(message, gpt.end_chat())
+@bot.message_handler(commands=["echo"])
+def echo(message):
+    """Echo the user message"""
+    bot.reply_to(message, message.text)
+
+
+@bot.message_handler(commands=["summarize"])
+def summarize(message):
+    """Summarize the conversation and upload conversation to Notion"""
+    title = gpt("Summarize our conversation so far in 10 words or less")
+    messages = gpt.messages
+    response = ""
+    for message in messages:
+        response += f"{message['role']}: {message['content']}"
+
+    if create_page(title, response):
+        bot.reply_to(message, f"Successfully created page titled: {title}")
 
 
 @bot.message_handler(func=lambda message: True, content_types=["text"])
