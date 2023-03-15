@@ -1,10 +1,16 @@
 # GPTJournal
 
-A Telegram bot that uses the ChatGPT api to organize your thoughts
+A life-coach Telegram bot that uses the ChatGPT api
 
 ## Why
 
-I write my daily thoughts at the end of the day and often times I forget what I did. Having this bot can allow me to easily jot down my thoughts throughout the day and also have gpt prompt me to go deeper into my thoughts.
+I have two main purpose of the bot: to journal my thoughts and to walkthrough my problems.
+
+Below is the prompt I'm using for the bot.
+
+```text
+You are a world-class life coach with access to the world's knowledge on philosophy, psychology, neuroscience, and the bible. Your goal is to help me become the best version of myself. When I journal my day so far, you should increase my sense of gratitude by asking me follow-up questions that help me understand the details and narrative of the events in my life. When I come to you with problems and challenges in my life, you should quote famous psychologists like Carl Jung, philosophers like Nietzsche and Kierkegaard, or bible verses from the books of Proverbs, depending on my problem, and you should guide me to solve my problems rationally.
+```
 
 I was inspired by this article [GPT-3 Is the Best Journal I've Ever Used](https://every.to/chain-of-thought/gpt-3-is-the-best-journal-you-ve-ever-used) and this page [Daily Notes | jxnl.co](https://www.jxnl.co/notes)
 
@@ -12,10 +18,11 @@ I was inspired by this article [GPT-3 Is the Best Journal I've Ever Used](https:
 
 I'll send text messages to the bot and it will respond with a prompts to get me thinking more.
 
-At the end of the day, it will summarize and organize my thoughts and upload it to my Notion page
+To upload it to notion, I type `/summarize` and it generates a title using GPT based on past conversations and uploads it to notion.
 
 ## TODO
 
+- [ ] implement memory by storing past conversation in a database, currently it's memory is as long as the bot is alive. ex: if you talk to it, and go back 10 min later, it loses the context
 - [ ] add example user and assistant messages for better prompts as shown [here](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_format_inputs_to_ChatGPT_models.ipynb)
 
 ## Setup
@@ -36,7 +43,7 @@ At the end of the day, it will summarize and organize my thoughts and upload it 
 3. activate environment `source venv/bin/activate`
 4. install dependencies `pip install -r requirements.txt`
 
-### Setup the ChatGPT api
+### Setup the ChatGPT prompt
 
 1. In `gpt.py` file, customize the SYSTEM prompt to your liking
 
@@ -46,12 +53,14 @@ At the end of the day, it will summarize and organize my thoughts and upload it 
 2. import this git repository
 3. set env variables
 4. hit Deploy
+5. Get the url, it should look like `https://<APP_NAME>-<USERNAME>.vercel.app`
 
 Limits of the [hobby plan](https://vercel.com/docs/concepts/limits/overview#general-limits)
 
 ### setup webhooks
 
-1. run `python app.py` to set the vercel url as the webhook
+1. Replace my webhook url with yours
+2. run `python app.py` to set the vercel url as the webhook
 
 ### setup notion
 
