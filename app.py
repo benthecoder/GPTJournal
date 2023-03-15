@@ -71,6 +71,7 @@ def total_messages(message):
 @bot.message_handler(commands=["t"])
 def chat(message):
     """Generate a response to a user-provided message"""
+
     response = gpt(message.text)
     bot.reply_to(message, response)
 
