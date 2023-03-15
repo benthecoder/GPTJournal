@@ -68,7 +68,7 @@ def total_messages(message):
     bot.reply_to(message, len(gpt.messages))
 
 
-@bot.message_handler(func=lambda message: True, content_types=["text"])
+@bot.message_handler(commands=["t"])
 def chat(message):
     """Generate a response to a user-provided message"""
     response = gpt(message.text)
